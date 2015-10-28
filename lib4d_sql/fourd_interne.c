@@ -122,10 +122,10 @@ int _query(FOURD *cnx,unsigned short int id_cmd,const char *request,FOURD_RESULT
 		res=calloc(1,sizeof(FOURD_RESULT));
 #if __STATEMENT_BASE64__
 	request_b64=base64_encode(request,strlen(request),&len);
-	sprintf_s(msg,2048,"%03d EXECUTE-STATEMENT\r\nSTATEMENT-BASE64:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\n\r\n",id_cmd,request_b64,"release",image_type);
+	sprintf_s(msg,2048,"%03d EXECUTE-STATEMENT\r\nFIRST-PAGE-SIZE:999999\r\nSTATEMENT-BASE64:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\n\r\n",id_cmd,request_b64,"release",image_type);
 	free(request_b64);
 #else
-	sprintf_s(msg,2048,"%03d EXECUTE-STATEMENT\r\nSTATEMENT:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\n\r\n",id_cmd,request,"release",image_type);
+	sprintf_s(msg,2048,"%03d EXECUTE-STATEMENT\r\nFIRST-PAGE-SIZE:999999\r\nSTATEMENT:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\n\r\n",id_cmd,request,"release",image_type);
 #endif
 	cnx->updated_row=-1;
 	socket_send(cnx,msg);
@@ -204,10 +204,10 @@ int _query_param(FOURD *cnx,unsigned short int id_cmd, const char *request,unsig
 	/* construct Header */
 #if __STATEMENT_BASE64__
 	request_b64=base64_encode(request,strlen(request),&len);
-	sprintf_s(msg,2048,"%03d EXECUTE-STATEMENT\r\nSTATEMENT-BASE64:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\nPARAMETER-TYPES:%s\r\n\r\n",id_cmd,request_b64,"release",image_type,sParam);
+	sprintf_s(msg,2048,"%03d EXECUTE-STATEMENT\r\nFIRST-PAGE-SIZE:999999\r\nSTATEMENT-BASE64:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\nPARAMETER-TYPES:%s\r\n\r\n",id_cmd,request_b64,"release",image_type,sParam);
 	free(request_b64);
 #else
-	sprintf_s(msg,MAX_HEADER_SIZE-1,"%03d EXECUTE-STATEMENT\r\nSTATEMENT:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\nPARAMETER-TYPES:%s\r\n\r\n",id_cmd,request,"release",image_type,sParam);
+	sprintf_s(msg,MAX_HEADER_SIZE-1,"%03d EXECUTE-STATEMENT\r\nFIRST-PAGE-SIZE:999999\r\nSTATEMENT:%s\r\nOutput-Mode:%s\r\nPREFERRED-IMAGE-TYPES:%s\r\nPARAMETER-TYPES:%s\r\n\r\n",id_cmd,request,"release",image_type,sParam);
 #endif
 	
 
