@@ -164,6 +164,7 @@ unsigned char *base64_decode_ex(const unsigned char *str, int length, int *ret_l
 			continue;
 		} else if (ch == -2) {
 			free(result);
+			result=NULL;
 			return NULL;
 		}
 
@@ -192,6 +193,7 @@ unsigned char *base64_decode_ex(const unsigned char *str, int length, int *ret_l
 		switch(i % 4) {
 		case 1:
 			free(result);
+			result=NULL;
 			return NULL;
 		case 2:
 			k++;
